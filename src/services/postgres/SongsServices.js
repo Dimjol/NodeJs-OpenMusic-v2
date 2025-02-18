@@ -52,7 +52,7 @@ class SongsService {
       throw new NotFoundError('Lagu tidak ditemukan');
     }
 
-    return mapSongToDBModel(result.rows[0]);
+    return result.rows.map(mapSongToDBModel)
   }
 
   async editSongById(id, { title, year, genre, performer, duration, albumId }) {
