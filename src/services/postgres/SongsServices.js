@@ -16,7 +16,7 @@ class SongsService {
 
     const query = {
       text: 'INSERT INTO songs VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id',
-      values: [id, title, year, performer, genre, duration, albumId],
+      values: [id, title, year, genre, performer, duration, albumId],
     };
 
     const result = await this._pool.query(query);
@@ -52,7 +52,7 @@ class SongsService {
       throw new NotFoundError('Lagu tidak ditemukan');
     }
 
-    return result.rows.map(mapSongToDBModel)[0]
+    return mapSongToDBModel(result.rows[0]);
   }
 
   async editSongById(id, { title, year, genre, performer, duration, albumId }) {
